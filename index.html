@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Islamic Knowledge Hub — Authentic Islamic Learning Resources">
+    <meta name="theme-color" content="#0b3b2f">
+    <meta property="og:title" content="Islamic Knowledge Hub">
+    <meta property="og:description" content="Discover authentic Islamic knowledge through Quran, Hadith, and scholarly works">
+    <meta property="og:type" content="website">
+    <title>Islamic Knowledge Hub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav id="main-nav"></nav>
+    
+    <main id="app"></main>
+
+    <!-- Auth Modal -->
+    <div id="auth-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <h2 id="auth-title">Admin Setup</h2>
+            <form id="auth-form">
+                <div class="form-group">
+                    <label for="auth-username">Username</label>
+                    <input type="text" id="auth-username" required>
+                </div>
+                <div class="form-group">
+                    <label for="auth-password">Password</label>
+                    <input type="password" id="auth-password" required>
+                </div>
+                <button type="submit" class="btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Page Builder Modal -->
+    <div id="page-builder-modal" class="modal hidden">
+        <div class="modal-content builder-content">
+            <span class="modal-close">&times;</span>
+            <h2>Page Builder</h2>
+            <div class="builder-form">
+                <input type="text" id="page-title" placeholder="Page Title" class="form-input">
+                <select id="page-category" class="form-input">
+                    <option value="">Select Category</option>
+                    <option value="Quran">Quran</option>
+                    <option value="Hadith">Hadith</option>
+                    <option value="Fiqh">Fiqh</option>
+                    <option value="Seerah">Seerah</option>
+                    <option value="Aqeedah">Aqeedah</option>
+                </select>
+                <input type="text" id="page-tags" placeholder="Tags (comma separated)" class="form-input">
+                
+                <div id="blocks-container" class="blocks-area"></div>
+                
+                <div class="block-controls">
+                    <button onclick="addBlock('heading')" class="btn-sm">+ Heading</button>
+                    <button onclick="addBlock('paragraph')" class="btn-sm">+ Paragraph</button>
+                    <button onclick="addBlock('quran-verse')" class="btn-sm">+ Quran Verse</button>
+                    <button onclick="addBlock('hadith')" class="btn-sm">+ Hadith</button>
+                    <button onclick="addBlock('quote')" class="btn-sm">+ Quote</button>
+                    <button onclick="addBlock('callout')" class="btn-sm">+ Callout</button>
+                </div>
+                
+                <button onclick="publishPage()" class="btn-primary" style="margin-top: 1rem; width: 100%;">
+                    📥 Publish & Download
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Toolbar -->
+    <div id="admin-toolbar" class="admin-bar hidden">
+        <button onclick="openPageBuilder()" class="btn-toolbar">+ New Page</button>
+        <button onclick="managePages()" class="btn-toolbar">Manage Pages</button>
+        <button onclick="editNav()" class="btn-toolbar">Edit Navigation</button>
+        <button onclick="logout()" class="btn-toolbar">Logout</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
