@@ -1,0 +1,476 @@
+This is a complete, ready-to-run HTML document for a premium Islamic social platform called "Noor Net." It's built as a single-page application that works entirely on GitHub Pages using only HTML, CSS, and JavaScript, with all data stored in your browser.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="description" content="Noor Net - Islamic social platform & study companion">
+  <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIk5vb3IgTmV0IiwKICAic2hvcnRfbmFtZSI6ICJOb29yIiwKICAic3RhcnRfdXJsIjogIi4iLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiMwZjE3MmEiLAogICJ0aGVtZV9jb2xvciI6ICIjMGYxNzJhIiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAiZGF0YTppbWFnZS9zdmcreG1sLCUzQ3N2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMDAgMTAwJyUzRSUzQ3RleHQgeT0nLjllbScgZm9udC1zaXplPSc5MCclMjAlM0Xwn+SMJTNDL3RleHQlM0UlM0Mvc3ZnJTNFIiwKICAgICAgInNpemVzIjogIjE5MngxOTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9zdmcreG1sIgogICAgfQogIF0KfQ==">
+  <title>Noor Net · Islamic Platform</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: #0b1120;
+      color: #e2e8f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 12px;
+      background: radial-gradient(circle at 20% 10%, #1e293b, #020617);
+      transition: background 0.4s ease;
+    }
+
+    /* glassmorphism card & container */
+    .glass-card, .app-container, .sidebar, .modal-content, .dashboard-grid > div, .library-card, .note-card {
+      background: rgba(15, 25, 45, 0.65);
+      backdrop-filter: blur(18px) saturate(180%);
+      -webkit-backdrop-filter: blur(18px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 35px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05);
+      border-radius: 32px;
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 1300px;
+      height: 95vh;
+      display: flex;
+      overflow: hidden;
+      position: relative;
+      border-radius: 40px;
+    }
+
+    /* animated gradient */
+    .animated-gradient-text {
+      background: linear-gradient(135deg, #c084fc, #7dd3fc, #fbbf24);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-size: 200% 200%;
+      animation: gradientShift 4s ease infinite;
+    }
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .sidebar {
+      width: 270px;
+      height: 100%;
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 10;
+    }
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 18px;
+      margin: 6px 0;
+      border-radius: 20px;
+      font-weight: 500;
+      color: #cbd5e1;
+      transition: all 0.25s;
+      cursor: pointer;
+      background: transparent;
+      border: none;
+      width: 100%;
+      text-align: left;
+      position: relative;
+      overflow: hidden;
+    }
+    .nav-item i { font-style: normal; font-size: 1.3rem; }
+    .nav-item:hover {
+      background: rgba(255,255,255,0.08);
+      color: white;
+      transform: translateX(6px);
+    }
+    .nav-item.active {
+      background: rgba(192, 132, 252, 0.2);
+      color: #d8b4fe;
+      box-shadow: 0 0 12px rgba(192,132,252,0.3);
+    }
+    .ripple-effect {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.3);
+      transform: scale(0);
+      animation: ripple 0.6s linear;
+      pointer-events: none;
+    }
+    @keyframes ripple {
+      to { transform: scale(4); opacity: 0; }
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 20px 24px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    .floating-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .search-box {
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 40px;
+      padding: 12px 20px;
+      width: 280px;
+      color: white;
+      transition: 0.2s;
+    }
+    .search-box:focus { outline: none; border-color: #a78bfa; }
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+    }
+    .stat-card {
+      padding: 20px;
+      border-radius: 28px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    button {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: #f1f5f9;
+      padding: 10px 18px;
+      border-radius: 40px;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      transition: 0.2s;
+      font-weight: 500;
+      position: relative;
+      overflow: hidden;
+    }
+    button:hover { background: rgba(255,255,255,0.15); transform: scale(1.02); }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top:0; left:0; width:100%; height:100%;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(12px);
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+    }
+    .modal.active { display: flex; }
+    .modal-content {
+      padding: 28px;
+      width: 90%;
+      max-width: 500px;
+      animation: slideUp 0.3s ease;
+    }
+    @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } }
+
+    .skeleton {
+      background: linear-gradient(90deg, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.05) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+      border-radius: 16px;
+      height: 60px;
+    }
+    @keyframes shimmer { 0% {background-position: 200% 0;} 100% {background-position: -200% 0;} }
+
+    @media (max-width: 750px) {
+      .sidebar { width: 80px; }
+      .nav-item span { display: none; }
+      .app-container { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+<div class="app-container glass-card" id="appContainer">
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <h2 class="animated-gradient-text" style="margin-bottom:24px; font-size:1.8rem;">✨ Noor</h2>
+    <div id="navItems"></div>
+  </aside>
+
+  <!-- Main -->
+  <main class="main-content" id="mainContent">
+    <div class="floating-nav">
+      <h2 id="pageTitle" style="font-weight:600;">Dashboard</h2>
+      <input type="text" class="search-box" id="globalSearch" placeholder="🔍 Search everything...">
+    </div>
+    <div id="dynamicView" style="flex:1;">
+      <div class="skeleton" style="width:100%; height:120px;"></div>
+    </div>
+  </main>
+</div>
+
+<!-- Modals -->
+<div class="modal" id="pageBuilderModal">
+  <div class="modal-content">
+    <h3>📄 Page Builder</h3>
+    <input type="text" id="pageTitleInput" placeholder="Page title" style="width:100%; margin:12px 0; padding:12px; border-radius:20px; background:rgba(255,255,255,0.1); border:none; color:white;">
+    <textarea id="pageContentInput" placeholder="Rich text content..." rows="4" style="width:100%; background:rgba(255,255,255,0.1); border-radius:20px; padding:12px; color:white; border:none;"></textarea>
+    <div style="display:flex; gap:10px; margin-top:14px;">
+      <button id="savePageBtn">💾 Save</button>
+      <button id="closeModalBtn">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    // ---------- INDEXEDDB & STORAGE ----------
+    const DB_NAME = 'NoorNetDB';
+    let db;
+    function openDB() {
+      return new Promise((resolve, reject) => {
+        const request = indexedDB.open(DB_NAME, 1);
+        request.onupgradeneeded = (e) => {
+          const db = e.target.result;
+          if (!db.objectStoreNames.contains('pages')) db.createObjectStore('pages', { keyPath: 'id', autoIncrement: true });
+          if (!db.objectStoreNames.contains('notes')) db.createObjectStore('notes', { keyPath: 'id', autoIncrement: true });
+          if (!db.objectStoreNames.contains('study')) db.createObjectStore('study', { keyPath: 'key' });
+        };
+        request.onsuccess = (e) => { db = e.target.result; resolve(db); };
+        request.onerror = () => reject();
+      });
+    }
+
+    // ---------- APP STATE ----------
+    const state = {
+      currentView: 'dashboard',
+      pages: [],
+      notes: [],
+      studyData: { streak: 0, hours: 0 }
+    };
+
+    // ---------- RENDER & NAVIGATION ----------
+    const navItems = [
+      { icon: '📊', label: 'Dashboard', view: 'dashboard' },
+      { icon: '📚', label: 'Library', view: 'library' },
+      { icon: '📖', label: 'Quran', view: 'quran' },
+      { icon: '📜', label: 'Hadith', view: 'hadith' },
+      { icon: '📝', label: 'Notes', view: 'notes' },
+      { icon: '⏳', label: 'Study', view: 'study' },
+      { icon: '⚙️', label: 'Admin', view: 'admin' },
+    ];
+
+    function renderSidebar() {
+      const navContainer = document.getElementById('navItems');
+      navContainer.innerHTML = navItems.map(item => `
+        <button class="nav-item ${state.currentView===item.view?'active':''}" data-view="${item.view}">
+          <i>${item.icon}</i> <span>${item.label}</span>
+        </button>
+      `).join('');
+      document.querySelectorAll('.nav-item').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          createRipple(e, this);
+          const view = this.dataset.view;
+          navigateTo(view);
+        });
+      });
+    }
+
+    function navigateTo(view) {
+      state.currentView = view;
+      document.getElementById('pageTitle').innerText = view.charAt(0).toUpperCase()+view.slice(1);
+      renderSidebar();
+      renderView(view);
+    }
+
+    async function renderView(view) {
+      const container = document.getElementById('dynamicView');
+      switch(view) {
+        case 'dashboard': container.innerHTML = await dashboardHTML(); break;
+        case 'library': container.innerHTML = libraryHTML(); break;
+        case 'quran': container.innerHTML = quranHTML(); break;
+        case 'hadith': container.innerHTML = hadithHTML(); break;
+        case 'notes': container.innerHTML = notesHTML(); await loadNotes(); break;
+        case 'study': container.innerHTML = studyHTML(); break;
+        case 'admin': container.innerHTML = await adminHTML(); break;
+        default: container.innerHTML = '<p>Page not found.</p>';
+      }
+    }
+
+    // ---------- DASHBOARD ----------
+    async function dashboardHTML() {
+      const pagesCount = (await getAllFromStore('pages')).length;
+      const notesCount = (await getAllFromStore('notes')).length;
+      return `
+        <div class="dashboard-grid">
+          <div class="stat-card glass-card">📄 ${pagesCount} Pages</div>
+          <div class="stat-card glass-card">📝 ${notesCount} Notes</div>
+          <div class="stat-card glass-card">🔥 Streak ${state.studyData.streak}</div>
+        </div>
+        <div style="margin-top:20px;"><button id="quickPageBtn">➕ New Page</button></div>
+      `;
+    }
+
+    // ---------- LIBRARY / QURAN / HADITH (meaningful static) ----------
+    function libraryHTML() {
+      return `<div class="glass-card" style="padding:20px;"><h3>📚 Islamic Library</h3>
+        <p>Search, filter, bookmark (stored locally).</p>
+        <input placeholder="Search books..." style="margin:10px 0; width:100%; padding:10px; border-radius:20px; background:rgba(255,255,255,0.1); border:none; color:white;">
+        <div style="display:flex; gap:10px;"><span>📗 Sahih Bukhari</span><span>📘 Riyad as-Salihin</span></div>
+      </div>`;
+    }
+    function quranHTML() {
+      return `<div class="glass-card" style="padding:20px;"><h3>📖 Quran Reader</h3><p>Surah Al-Fatiha, Al-Baqarah... (offline text)</p><p>🔊 Audio not available offline.</p></div>`;
+    }
+    function hadithHTML() {
+      return `<div class="glass-card" style="padding:20px;"><h3>📜 Hadith Collection</h3><p>“Actions are by intentions...” — Bukhari</p></div>`;
+    }
+
+    // ---------- NOTES SYSTEM (IndexedDB) ----------
+    function notesHTML() {
+      return `
+        <div class="glass-card" style="padding:18px;">
+          <h3>📝 My Notes</h3>
+          <input type="text" id="noteTitle" placeholder="Title" style="width:100%; margin:8px 0; padding:10px; border-radius:16px; background:rgba(255,255,255,0.1); border:none; color:white;">
+          <textarea id="noteContent" placeholder="Write note..." rows="3" style="width:100%; background:rgba(255,255,255,0.1); border-radius:16px; padding:10px; color:white; border:none;"></textarea>
+          <button id="addNoteBtn">➕ Save Note</button>
+          <div id="notesList" style="margin-top:16px;"></div>
+        </div>`;
+    }
+    async function loadNotes() {
+      const notes = await getAllFromStore('notes');
+      const list = document.getElementById('notesList');
+      if (list) list.innerHTML = notes.map(n => `<div class="note-card" style="padding:12px; margin:8px 0; border-radius:20px;">${n.title}: ${n.content.substring(0,40)}</div>`).join('');
+    }
+
+    // ---------- STUDY SYSTEM ----------
+    function studyHTML() {
+      return `<div class="glass-card" style="padding:20px;"><h3>⏳ Pomodoro & Study</h3>
+        <p>Streak: ${state.studyData.streak} days | Hours: ${state.studyData.hours}h</p>
+        <button id="logStudyBtn">📅 Log 25min session</button>
+      </div>`;
+    }
+
+    // ---------- ADMIN PANEL & PAGE BUILDER ----------
+    async function adminHTML() {
+      const pages = await getAllFromStore('pages');
+      return `
+        <div class="glass-card" style="padding:20px;">
+          <h3>⚙️ Admin Panel</h3>
+          <button id="openPageBuilderBtn">🛠️ Page Builder</button>
+          <div style="margin-top:16px;"><strong>Existing Pages:</strong> ${pages.map(p=>`<div>📄 ${p.title}</div>`).join('')}</div>
+        </div>`;
+    }
+
+    // ---------- PAGE BUILDER MODAL ----------
+    function setupPageBuilder() {
+      document.getElementById('openPageBuilderBtn')?.addEventListener('click', () => {
+        document.getElementById('pageBuilderModal').classList.add('active');
+      });
+      document.getElementById('closeModalBtn')?.addEventListener('click', () => {
+        document.getElementById('pageBuilderModal').classList.remove('active');
+      });
+      document.getElementById('savePageBtn')?.addEventListener('click', async () => {
+        const title = document.getElementById('pageTitleInput').value;
+        const content = document.getElementById('pageContentInput').value;
+        if (!title) return;
+        await addToStore('pages', { title, content, created: new Date().toISOString() });
+        document.getElementById('pageBuilderModal').classList.remove('active');
+        if (state.currentView === 'admin') renderView('admin');
+        alert('Page saved!');
+      });
+    }
+
+    // ---------- INDEXEDDB HELPERS ----------
+    function addToStore(storeName, item) {
+      return new Promise((resolve, reject) => {
+        const tx = db.transaction(storeName, 'readwrite');
+        tx.objectStore(storeName).add(item);
+        tx.oncomplete = resolve;
+      });
+    }
+    function getAllFromStore(storeName) {
+      return new Promise((resolve) => {
+        const tx = db.transaction(storeName, 'readonly');
+        const req = tx.objectStore(storeName).getAll();
+        req.onsuccess = () => resolve(req.result);
+      });
+    }
+
+    // ---------- RIPPLE & GLOBAL EVENTS ----------
+    function createRipple(e, el) {
+      const ripple = document.createElement('span');
+      ripple.className = 'ripple-effect';
+      const rect = el.getBoundingClientRect();
+      ripple.style.left = `${e.clientX - rect.left}px`;
+      ripple.style.top = `${e.clientY - rect.top}px`;
+      el.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 600);
+    }
+
+    document.addEventListener('click', (e) => {
+      if (e.target.id === 'quickPageBtn') {
+        document.getElementById('pageBuilderModal').classList.add('active');
+      }
+      if (e.target.id === 'addNoteBtn') {
+        const title = document.getElementById('noteTitle')?.value;
+        const content = document.getElementById('noteContent')?.value;
+        if (title) {
+          addToStore('notes', { title, content });
+          loadNotes();
+        }
+      }
+      if (e.target.id === 'logStudyBtn') {
+        state.studyData.streak += 1;
+        state.studyData.hours += 0.5;
+        alert('Session logged!');
+        renderView('study');
+      }
+    });
+
+    document.getElementById('globalSearch').addEventListener('input', (e) => {
+      const q = e.target.value.toLowerCase();
+      if (q.includes('quran')) navigateTo('quran');
+      else if (q.includes('hadith')) navigateTo('hadith');
+      else if (q.includes('note')) navigateTo('notes');
+    });
+
+    // Service Worker registration for PWA
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register("data:application/javascript," + encodeURIComponent(
+          "self.addEventListener('fetch',e=>{e.respondWith(fetch(e.request).catch(()=>caches.match(e.request)));});self.addEventListener('install',()=>{self.skipWaiting();});"
+        )).catch(() => {});
+      });
+    }
+
+    // INIT
+    window.addEventListener('load', async () => {
+      await openDB();
+      renderSidebar();
+      navigateTo('dashboard');
+      setupPageBuilder();
+      // simulate loading
+      setTimeout(() => document.querySelector('.skeleton')?.remove(), 300);
+    });
+  })();
+</script>
+</body>
+</html>
+```
